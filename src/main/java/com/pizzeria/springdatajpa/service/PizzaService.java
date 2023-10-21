@@ -5,8 +5,6 @@ import com.pizzeria.springdatajpa.persistence.repository.PizzaRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,11 +21,23 @@ public class PizzaService {
     }
 
     public List<PizzaEntity> getAll(){
-        return pizzaRepository.findAll();
+        return this.pizzaRepository.findAll();
     }
     
-    public Optional<PizzaEntity> getById(int pizzaId){
-        return pizzaRepository.findById(pizzaId);
+    public PizzaEntity getById(int pizzaId){
+        return this.pizzaRepository.findById(pizzaId).orElse(null);
+    }
+    
+    public PizzaEntity save(PizzaEntity pizza){
+        return this.pizzaRepository.save(pizza);
+    }
+    
+    public boolean exists(int pizzaId){
+        return this.pizzaRepository.existsById(pizzaId);
+    }
+    
+    public void delete(int pizzaId){
+        this.pizzaRepository.deleteById(pizzaId);
     }
     
 }

@@ -1,10 +1,12 @@
 package com.pizzeria.springdatajpa.persistence.repository;
-import com.pizzeria.springdatajpa.persistence.entity.PizzaEntity;
+
+import com.pizzeria.springdatajpa.persistence.entity.OrderEntity;
 import org.springframework.data.repository.ListCrudRepository;
+
 /**
  *
  * @author edwin
  */
-public interface PizzaRepository extends ListCrudRepository<PizzaEntity, Integer>{
+public interface OrderRepository extends ListCrudRepository<OrderEntity, Integer>{
     
 }
