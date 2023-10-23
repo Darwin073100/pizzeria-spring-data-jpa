@@ -4,6 +4,7 @@ import com.pizzeria.springdatajpa.persistence.entity.PizzaEntity;
 import com.pizzeria.springdatajpa.service.PizzaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,14 +31,42 @@ public class PizzaController {
         this.pizzaService = pizzaService;
     }
     
+//    @GetMapping
+//    public ResponseEntity<List<PizzaEntity>> getAll(){
+//        return ResponseEntity.ok(this.pizzaService.getAll());
+//    }
+    
     @GetMapping
-    public ResponseEntity<List<PizzaEntity>> getAll(){
-        return ResponseEntity.ok(this.pizzaService.getAll());
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "4") int elements){
+        return ResponseEntity.ok(this.pizzaService.getAll(page, elements));
     }
     
+//    @GetMapping("/available")
+//    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+//        return ResponseEntity.ok(this.pizzaService.getAvailable());
+//    }
+    
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAvailable(){
-        return ResponseEntity.ok(this.pizzaService.getAvailable());
+    public ResponseEntity<Page<PizzaEntity>> getAvailable(@RequestParam(defaultValue = "0") int page, 
+                                                            @RequestParam(defaultValue = "4") int elements, 
+                                                            @RequestParam(defaultValue = "price") String sortBy,
+                                                            @RequestParam(defaultValue = "DESC") String sortDirection){
+        return ResponseEntity.ok(this.pizzaService.getAvailable(page, elements, sortBy, sortDirection));
+    }
+    
+    @GetMapping("/with/{ingredient}")
+    public ResponseEntity<List<PizzaEntity>> getWith(@PathVariable String ingredient){
+        return ResponseEntity.ok(this.pizzaService.getWith(ingredient));
+    }
+    
+    @GetMapping("/without/{ingredient}")
+    public ResponseEntity<List<PizzaEntity>> getWithout(@PathVariable String ingredient){
+        return ResponseEntity.ok(this.pizzaService.getWithout(ingredient));
+    }
+    
+    @GetMapping("/cheapest/{price}")
+    public ResponseEntity<List<PizzaEntity>> getCheapest(@PathVariable double price){
+        return ResponseEntity.ok(this.pizzaService.getCheapest(price));
     }
     
     @GetMapping("/name/{name}")
