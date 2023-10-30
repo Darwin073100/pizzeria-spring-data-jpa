@@ -2,12 +2,14 @@ package com.pizzeria.springdatajpa.web.controller;
 
 import com.pizzeria.springdatajpa.persistence.entity.PizzaEntity;
 import com.pizzeria.springdatajpa.service.PizzaService;
+import com.pizzeria.springdatajpa.service.dto.UpdatePizzaPriceDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -104,6 +106,13 @@ public class PizzaController {
         return ResponseEntity.notFound().build();
     }
     
-
+    @PatchMapping("/price")
+    public ResponseEntity<Void> updatePrice(@RequestBody UpdatePizzaPriceDto dto){
+        if(pizzaService.exists(dto.getPizzaId())){
+            this.pizzaService.updatePrice(dto);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
     
 }

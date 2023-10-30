@@ -5,6 +5,7 @@
 package com.pizzeria.springdatajpa.service;
 
 import com.pizzeria.springdatajpa.persistence.entity.OrderEntity;
+import com.pizzeria.springdatajpa.persistence.projection.OrderSummary;
 import com.pizzeria.springdatajpa.persistence.repository.OrderRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,5 +43,13 @@ public class OrderService {
     public List<OrderEntity> getOutSideOrder(){
         List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
         return this.orderRepository.findAllByMethodIn(methods);
+    }
+    
+    public List<OrderEntity> getCustomerOrders(String customerId){
+        return this.orderRepository.findCustomerOrders(customerId);
+    }
+    
+    public OrderSummary getSumary(int orderId){
+        return this.orderRepository.findSumary(orderId);
     }
 }
