@@ -29,6 +29,9 @@ public class UserSecurityService implements UserDetailsService {
         UserEntity userEntity = this.userRepository.findById(username)
                 .orElseThrow(()-> new UsernameNotFoundException("User " + username + " not found"));
         String[] roles = userEntity.getRoles().stream().map(UserRoleEntity::getRole).toArray(String[]::new);
+
+        System.out.println(userEntity.toString());
+
         return User.builder()
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
