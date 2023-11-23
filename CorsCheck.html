@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CorsCheck</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        const app = document.getElementById('app');
+        const options = {
+        method: 'GET',
+        headers: {
+            cookie: 'JSESSIONID=C2D200C60DF14FD64A1218807C29B8DD',
+            Authorization: 'Basic dXNlcjowOThmMjQ4NC1mNjA2LTQ4ZjktOTYzNy01MzhjNmVhYTY0MjI='
+        }
+        };
+
+        fetch('http://localhost:8090/api/pizzas', options)
+        .then(response => response.json())
+        .then(response => {
+            app.innerText=response.content.map(item =>{
+                return "Id: " + item.pizzaId + "\n" +
+                "Name: " + item.name + "\n" +
+                "Description: " + item.description + "\n"
+            })
+            console.log(response)
+        })
+        .catch(err => console.error(err));
+    </script>
+</body>
+</html>
