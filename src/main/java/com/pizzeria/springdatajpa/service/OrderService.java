@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 /**
@@ -44,7 +45,8 @@ public class OrderService {
         List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
         return this.orderRepository.findAllByMethodIn(methods);
     }
-    
+
+    @Secured("ROLE_ADMIN")
     public List<OrderEntity> getCustomerOrders(String customerId){
         return this.orderRepository.findCustomerOrders(customerId);
     }
