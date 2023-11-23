@@ -1,6 +1,7 @@
-package com.pizzeria.springdatajpa;
+package com.pizzeria.springdatajpa.service;
 
 import com.pizzeria.springdatajpa.persistence.entity.UserEntity;
+import com.pizzeria.springdatajpa.persistence.entity.UserRoleEntity;
 import com.pizzeria.springdatajpa.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -22,12 +23,13 @@ public class UserSecurityService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = this.userRepository.findById(username)
                 .orElseThrow(()-> new UsernameNotFoundException("User " + username + " not found"));
+        String[] roles = userEntity.getRoles().stream().map(UserRoleEntity::getRole).toArray(String[]::new);
         return User.builder()
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .accountLocked(userEntity.getLocked())
                 .disabled(userEntity.getDisable())
-                .roles("ADMIN")
+                .roles(roles)
                 .build();
     }
 }
