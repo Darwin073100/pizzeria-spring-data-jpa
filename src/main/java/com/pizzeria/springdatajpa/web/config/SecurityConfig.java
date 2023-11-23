@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .httpBasic();
         return http.build();
     }
-    @Bean
+/*    @Bean
     public UserDetailsService memoryUser(){
         UserDetails admin = User.builder()
                 .username("admin")
@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(admin, customer);
     }
+    */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
