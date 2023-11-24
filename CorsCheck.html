@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>CorsCheck</title>
@@ -11,11 +11,9 @@
         const options = {
             method: 'GET',
             headers: {
-                cookie: 'JSESSIONID=048E563D16CA39C3A1A6219C0353D331',
-                'User-Agent': 'insomnia/8.4.2',
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6InBpenplcmlhIiwiaWF0IjoxNzAwNzgwOTQxLCJleHAiOjE3MDIwNzY5NDF9.FaQaFV-5caDlTFIdhrYeay9EY-6CbQ2tm2m1hNU9408'
             }
-};
+        };
 
         fetch('http://localhost:8090/api/pizzas', options)
         .then(response => response.json())
