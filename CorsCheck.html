@@ -9,12 +9,13 @@
     <script>
         const app = document.getElementById('app');
         const options = {
-        method: 'GET',
-        headers: {
-            cookie: 'JSESSIONID=C2D200C60DF14FD64A1218807C29B8DD',
-            Authorization: 'Basic dXNlcjowOThmMjQ4NC1mNjA2LTQ4ZjktOTYzNy01MzhjNmVhYTY0MjI='
-        }
-        };
+            method: 'GET',
+            headers: {
+                cookie: 'JSESSIONID=048E563D16CA39C3A1A6219C0353D331',
+                'User-Agent': 'insomnia/8.4.2',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6InBpenplcmlhIiwiaWF0IjoxNzAwNzgwOTQxLCJleHAiOjE3MDIwNzY5NDF9.FaQaFV-5caDlTFIdhrYeay9EY-6CbQ2tm2m1hNU9408'
+            }
+};
 
         fetch('http://localhost:8090/api/pizzas', options)
         .then(response => response.json())
